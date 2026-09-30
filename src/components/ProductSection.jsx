@@ -3,10 +3,13 @@ import { useCart } from '../context/CartContext';
 import { PRODUCTS } from '../data/products';
 import ProductCard from './ProductCard';
 import { ArrowRight, Flame } from 'lucide-react';
+import { useScrollReveal, revealClass } from '../hooks/useScrollReveal';
 
-export default function ProductSection({ title = "NEW ARRIVALS", subtitle = "Fresh Drips & Streetwear Combos", initialFilter = "all" }) {
+export default function ProductSection({ title = "NEW ARRIVALS", subtitle = "Fresh Drips & Streetwear Combos" }) {
   const [activeTab, setActiveTab] = useState('all');
   const { setCurrentPage, setSelectedCategory } = useCart();
+  const [headerRef, headerVisible] = useScrollReveal();
+  const [gridRef, gridVisible] = useScrollReveal({ threshold: 0.05 });
 
   const filteredProducts = PRODUCTS.filter(p => {
     if (activeTab === 'new') return p.isNew;
@@ -27,7 +30,7 @@ export default function ProductSection({ title = "NEW ARRIVALS", subtitle = "Fre
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-neutral-200 gap-4">
+        <div ref={headerRef} className={`flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-neutral-200 gap-4 ${revealClass(headerVisible, 'fadeUp')}`}>
           <div>
             <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-black mb-1">
               <Flame className="w-3.5 h-3.5" /> Classy Drip Exclusive
@@ -35,13 +38,11 @@ export default function ProductSection({ title = "NEW ARRIVALS", subtitle = "Fre
             <h2 className="font-serif text-2xl sm:text-4xl font-bold text-black tracking-tight">
               {title}
             </h2>
-            <p className="text-xs sm:text-sm text-neutral-500 mt-1">
-              {subtitle}
-            </p>
+            <p className="text-xs sm:text-sm text-neutral-500 mt-1">{subtitle}</p>
           </div>
 
-          {/* Filter Tabs - Monochrome */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
+          {/* Filter Tabs */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 no-scrollbar">
             {[
               { id: 'all', label: 'All Picks' },
               { id: 'new', label: 'New Arrivals' },
@@ -52,10 +53,10 @@ export default function ProductSection({ title = "NEW ARRIVALS", subtitle = "Fre
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 rounded-full text-xs font-bold tracking-wider whitespace-nowrap transition-all ${
+                className={`btn-press px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold tracking-wider whitespace-nowrap transition-all ${
                   activeTab === tab.id
                     ? 'bg-black text-white shadow-md'
-                    : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200 hover:text-black border border-neutral-200'
+                    : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200 hover:text-black border border-neutral-200'
                 }`}
               >
                 {tab.label}
@@ -64,10 +65,15 @@ export default function ProductSection({ title = "NEW ARRIVALS", subtitle = "Fre
           </div>
         </div>
 
-        {/* Product Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {filteredProducts.slice(0, 8).map(product => (
-            <ProductCard key={product.id} product={product} />
+        {/* Product Grid with stagger */}
+        <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+          {filteredProducts.slice(0, 8).map((product, index) => (
+            <div
+              key={product.id}
+              className={gridVisible ? `animate-scaleIn stagger-${Math.min(index + 1, 8)}` : 'opacity-0'}
+            >
+              <ProductCard product={product} index={index} />
+            </div>
           ))}
         </div>
 
@@ -75,9 +81,9 @@ export default function ProductSection({ title = "NEW ARRIVALS", subtitle = "Fre
         <div className="mt-10 sm:mt-12 text-center">
           <button
             onClick={handleViewAll}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-black text-white hover:bg-neutral-800 font-bold text-xs uppercase tracking-widest transition-all group shadow-md"
+            className="btn-press ripple inline-flex items-center gap-2 px-7 sm:px-10 py-3.5 sm:py-4 rounded-full bg-black text-white hover:bg-neutral-800 font-bold text-xs uppercase tracking-widest transition-all group shadow-lg"
           >
-            <span>Shop Now (All 18+ Collections)</span>
+            <span>Shop Now — All 18+ Collections</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </button>
         </div>

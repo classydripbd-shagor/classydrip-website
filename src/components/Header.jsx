@@ -365,7 +365,7 @@ export default function Header() {
           />
 
           {/* Drawer Content */}
-          <div className="relative w-4/5 max-w-xs bg-white h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-left duration-200">
+          <div className="relative w-4/5 max-w-xs bg-white h-full shadow-2xl flex flex-col z-10 animate-slideInLeft">
             <div className="p-4 border-b border-neutral-100 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <img src="/logo-emblem.png" alt="Classy Drip" className="w-8 h-8 object-contain" />

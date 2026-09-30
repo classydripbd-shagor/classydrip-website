@@ -1,6 +1,7 @@
 import React from 'react';
 import { REVIEWS } from '../data/reviews';
 import { Star, CheckCircle2, Quote } from 'lucide-react';
+import { useScrollReveal, revealClass } from '../hooks/useScrollReveal';
 
 export default function ReviewsSection() {
   return (

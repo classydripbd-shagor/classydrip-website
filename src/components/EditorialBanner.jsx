@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { useScrollReveal, revealClass } from '../hooks/useScrollReveal';
 
 export default function EditorialBanner() {
   const { setCurrentPage, setSelectedCategory } = useCart();
