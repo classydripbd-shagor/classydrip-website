@@ -66,11 +66,11 @@ export default function ProductSection({ title = "NEW ARRIVALS", subtitle = "Fre
         </div>
 
         {/* Product Grid with stagger */}
-        <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           {filteredProducts.slice(0, 8).map((product, index) => (
             <div
               key={product.id}
-              className={gridVisible ? `animate-scaleIn stagger-${Math.min(index + 1, 8)}` : 'opacity-0'}
+              className={`stagger-${Math.min(index + 1, 8)}`}
             >
               <ProductCard product={product} index={index} />
             </div>
