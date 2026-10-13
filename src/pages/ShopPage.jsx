@@ -102,7 +102,7 @@ export default function ShopPage() {
         </div>
 
         {/* Layout: Sidebar Filter + Product Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           
           {/* Desktop Filter Sidebar */}
           <div className="hidden lg:block space-y-6 bg-white p-6 rounded-3xl border border-neutral-100 shadow-sm h-fit">
@@ -173,7 +173,7 @@ export default function ShopPage() {
             </div>
           </div>
 
-          {/* Product Grid (3 cols on desktop) */}
+          {/* Product Grid */}
           <div className="lg:col-span-3">
             {filteredProducts.length === 0 ? (
               <div className="py-20 text-center bg-white rounded-3xl border border-neutral-100 p-8 space-y-4">
@@ -196,7 +196,7 @@ export default function ShopPage() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+              <div className="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3">
                 {filteredProducts.map(product => (
                   <ProductCard key={product.id} product={product} />
                 ))}

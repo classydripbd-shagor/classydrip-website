@@ -292,21 +292,22 @@ export default function Header() {
           </nav>
 
           {/* Right Action Area: Shop Now Button + Search, Wishlist, Cart */}
+          {/* Right Action Area: Shop Now Button + Desktop icons */}
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             
             {/* The Requested "Shop Now" Button */}
             <button
               onClick={() => handleNavClick('shop', 'all')}
-              className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 bg-black hover:bg-neutral-800 text-white font-bold text-xs uppercase tracking-widest rounded-full transition-all shadow-md hover:shadow-lg active:scale-95 group flex-shrink-0"
+              className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-2 sm:py-2.5 bg-black hover:bg-neutral-800 text-white font-bold text-[11px] sm:text-xs uppercase tracking-wider rounded-full transition-all shadow-md hover:shadow-lg active:scale-95 group flex-shrink-0"
             >
               <span>Shop Now</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
             </button>
 
-            {/* Search Icon Button */}
+            {/* Desktop Search Icon Button */}
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="p-2 sm:p-2.5 text-black hover:bg-neutral-100 rounded-full transition flex items-center justify-center"
+              className="hidden lg:flex p-2 sm:p-2.5 text-black hover:bg-neutral-100 rounded-full transition items-center justify-center"
               title="Search"
             >
               <Search className="w-5 h-5" />
@@ -315,7 +316,7 @@ export default function Header() {
             {/* Wishlist Button */}
             <button
               onClick={() => handleNavClick('shop', 'all')}
-              className="relative p-2 sm:p-2.5 text-black hover:bg-neutral-100 rounded-full transition flex items-center justify-center"
+              className="hidden sm:flex relative p-2 sm:p-2.5 text-black hover:bg-neutral-100 rounded-full transition items-center justify-center"
               title="Wishlist"
             >
               <Heart className="w-5 h-5" />
@@ -329,7 +330,7 @@ export default function Header() {
             {/* Cart / Bag Button */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="flex items-center gap-2 px-3 sm:px-3.5 py-2 border-2 border-black bg-white hover:bg-black text-black hover:text-white rounded-full transition duration-200 group flex-shrink-0"
+              className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 border-2 border-black bg-white hover:bg-black text-black hover:text-white rounded-full transition duration-200 group flex-shrink-0"
             >
               <div className="relative">
                 <ShoppingBag className="w-4 h-4 transition group-hover:scale-110" />
