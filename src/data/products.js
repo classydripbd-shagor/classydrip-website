@@ -1,11 +1,60 @@
 export const CATEGORIES = [
-  { id: 'all', name: 'All Collections', count: 18 },
-  { id: 'streetwear-sets', name: 'Streetwear Duo Sets', count: 4 },
-  { id: 'drop-shoulder', name: 'Drop Shoulder Tees', count: 5 },
-  { id: 'trousers', name: 'Baggy Trousers & Pants', count: 4 },
-  { id: 'shirts', name: 'Premium Shirts', count: 3 },
-  { id: 'coord-sets', name: 'Co-ord Sets', count: 4 },
-  { id: 'jeans', name: 'Denim & Cargo', count: 2 },
+  { 
+    id: 'all', 
+    name: 'All Collections', 
+    count: 18, 
+    image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=400&q=80',
+    colorBg: 'bg-neutral-900',
+    colorText: 'text-white'
+  },
+  { 
+    id: 'streetwear-sets', 
+    name: 'Streetwear Duo Sets', 
+    count: 4, 
+    image: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=400&q=80',
+    colorBg: 'bg-neutral-100',
+    colorText: 'text-neutral-900'
+  },
+  { 
+    id: 'drop-shoulder', 
+    name: 'Drop Shoulder Tees', 
+    count: 5, 
+    image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=400&q=80',
+    colorBg: 'bg-neutral-100',
+    colorText: 'text-neutral-900'
+  },
+  { 
+    id: 'trousers', 
+    name: 'Baggy Trousers & Pants', 
+    count: 4, 
+    image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=400&q=80',
+    colorBg: 'bg-neutral-100',
+    colorText: 'text-neutral-900'
+  },
+  { 
+    id: 'coord-sets', 
+    name: "Women's Co-ords", 
+    count: 4, 
+    image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80',
+    colorBg: 'bg-neutral-100',
+    colorText: 'text-neutral-900'
+  },
+  { 
+    id: 'shirts', 
+    name: 'Premium Shirts', 
+    count: 3, 
+    image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=400&q=80',
+    colorBg: 'bg-neutral-100',
+    colorText: 'text-neutral-900'
+  },
+  { 
+    id: 'jeans', 
+    name: 'Denim & Cargo', 
+    count: 2, 
+    image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=400&q=80',
+    colorBg: 'bg-neutral-100',
+    colorText: 'text-neutral-900'
+  },
 ];
 
 export const PRODUCTS = [

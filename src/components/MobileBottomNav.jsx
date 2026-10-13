@@ -1,7 +1,6 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
-import { Home, Compass, Heart, ShoppingBag, PhoneCall } from 'lucide-react';
-import { BRAND_INFO } from '../data/reviews';
+import { Home, LayoutGrid, Search, ShoppingBag, User } from 'lucide-react';
 
 export default function MobileBottomNav() {
   const { 
@@ -10,7 +9,7 @@ export default function MobileBottomNav() {
     setSelectedCategory, 
     cartCount, 
     setIsCartOpen,
-    wishlist
+    setIsSearchOpen
   } = useCart();
 
   const handleNav = (page, category = 'all') => {
@@ -21,83 +20,94 @@ export default function MobileBottomNav() {
 
   const navItems = [
     {
+      id: 'home',
       label: 'Home',
       icon: Home,
       active: currentPage === 'home',
       onClick: () => handleNav('home'),
     },
     {
-      label: 'Shop',
-      icon: Compass,
-      active: currentPage === 'shop',
-      onClick: () => handleNav('shop', 'all'),
+      id: 'categories',
+      label: 'Categories',
+      icon: LayoutGrid,
+      active: currentPage === 'categories',
+      onClick: () => handleNav('categories'),
+      highlight: true, // KeenCares distinctive rounded pill indicator
     },
     {
-      label: 'Saved',
-      icon: Heart,
+      id: 'search',
+      label: 'Search',
+      icon: Search,
       active: false,
-      badge: wishlist.length > 0 ? wishlist.length : null,
-      onClick: () => handleNav('shop', 'all'),
+      onClick: () => setIsSearchOpen(true),
     },
     {
+      id: 'bag',
       label: 'Bag',
       icon: ShoppingBag,
       active: false,
       badge: cartCount > 0 ? cartCount : null,
       onClick: () => setIsCartOpen(true),
-      special: true,
+    },
+    {
+      id: 'account',
+      label: 'Track',
+      icon: User,
+      active: currentPage === 'track' || currentPage === 'contact',
+      onClick: () => handleNav('track'),
     },
   ];
 
   return (
     <nav className="fixed bottom-0 inset-x-0 z-40 lg:hidden">
-      {/* Safe area bg */}
-      <div className="bg-white/96 backdrop-blur-xl border-t border-neutral-200 shadow-[0_-4px_24px_rgba(0,0,0,0.08)]">
-        <div className="flex items-center justify-around px-2 pt-2 pb-safe">
-          {navItems.map((item, idx) => {
+      {/* App Bar Container with crisp Black & White design */}
+      <div className="bg-white/95 backdrop-blur-xl border-t border-neutral-200/90 shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
+        <div className="flex items-center justify-around px-3 py-1.5 pb-safe max-w-md mx-auto">
+          {navItems.map((item) => {
             const Icon = item.icon;
+            const isCategories = item.id === 'categories';
+            
             return (
               <button
-                key={idx}
+                key={item.id}
                 onClick={item.onClick}
-                className={`mobile-nav-item flex flex-col items-center gap-0.5 px-3 py-2 rounded-xl min-w-[56px] transition-all duration-200 ${
-                  item.active 
-                    ? 'text-black' 
-                    : 'text-neutral-400 hover:text-neutral-700'
-                } ${item.special ? 'relative' : ''}`}
+                className={`group relative flex flex-col items-center justify-center py-1 px-2.5 rounded-2xl transition-all duration-200 active:scale-90 ${
+                  item.active ? 'text-black' : 'text-neutral-400 hover:text-black'
+                }`}
               >
-                <div className="relative">
-                  {item.special ? (
-                    <div className={`p-2 rounded-xl transition-all duration-200 ${item.badge ? 'bg-black text-white' : 'bg-neutral-100 text-neutral-600'}`}>
-                      <Icon className="w-5 h-5" />
-                    </div>
-                  ) : (
-                    <Icon className={`w-5 h-5 transition-all duration-200 ${item.active ? 'stroke-[2.2]' : ''}`} />
-                  )}
-                  {item.badge && (
-                    <span className="animate-popIn absolute -top-1.5 -right-1.5 bg-black text-white text-[9px] font-extrabold rounded-full w-4 h-4 flex items-center justify-center border border-white">
-                      {item.badge}
-                    </span>
-                  )}
-                </div>
-                <span className={`text-[10px] font-semibold tracking-tight ${item.active ? 'text-black' : ''}`}>
+                {/* Active indicator box for Categories (KeenCares style pill highlight) */}
+                {isCategories && item.active ? (
+                  <div className="w-11 h-7 bg-black text-white rounded-xl flex items-center justify-center shadow-md mb-0.5">
+                    <Icon className="w-4 h-4 stroke-[2.2]" />
+                  </div>
+                ) : (
+                  <div className="relative p-1">
+                    <Icon className={`w-5 h-5 transition-transform duration-200 ${
+                      item.active ? 'stroke-[2.5] scale-110 text-black' : 'stroke-[1.8]'
+                    }`} />
+
+                    {/* Cart count badge */}
+                    {item.badge && (
+                      <span className="animate-popIn absolute -top-1 -right-1.5 bg-black text-white text-[9px] font-black rounded-full w-4 h-4 flex items-center justify-center border-2 border-white shadow-sm">
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                <span className={`text-[10px] tracking-tight font-bold transition-colors ${
+                  item.active ? 'text-black font-extrabold' : 'text-neutral-500'
+                }`}>
                   {item.label}
                 </span>
-                {item.active && (
-                  <span className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-black rounded-full" />
+
+                {/* Subtle active dot underneath */}
+                {item.active && !isCategories && (
+                  <span className="absolute bottom-0 w-1 h-1 bg-black rounded-full" />
                 )}
               </button>
             );
           })}
-
-          {/* Call Button */}
-          <a
-            href={`tel:${BRAND_INFO.phone}`}
-            className="mobile-nav-item flex flex-col items-center gap-0.5 px-3 py-2 rounded-xl min-w-[56px] text-neutral-400 hover:text-neutral-700 transition-colors"
-          >
-            <PhoneCall className="w-5 h-5 text-emerald-600" />
-            <span className="text-[10px] font-semibold tracking-tight">Call</span>
-          </a>
         </div>
       </div>
     </nav>

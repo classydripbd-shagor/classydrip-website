@@ -106,30 +106,23 @@ export default function Header() {
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
           
-          {/* Mobile Menu & Search Button */}
+          {/* Mobile Menu Button */}
           <div className="flex items-center lg:hidden gap-1">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="p-2 text-black hover:bg-neutral-100 rounded-lg transition"
+              className="p-2 text-black hover:bg-neutral-100 rounded-xl transition"
               aria-label="Open menu"
             >
-              <Menu className="w-6 h-6" />
-            </button>
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              className="p-2 text-black hover:bg-neutral-100 rounded-lg transition"
-              aria-label="Search"
-            >
-              <Search className="w-5 h-5" />
+              <Menu className="w-5 h-5" />
             </button>
           </div>
 
           {/* Brand Logo (Emblem + Monogram Typography in Pure Black) */}
           <div 
-            className="flex items-center gap-3 cursor-pointer flex-shrink-0 group" 
+            className="flex items-center gap-2.5 cursor-pointer flex-shrink-0 group" 
             onClick={() => handleNavClick('home')}
           >
-            <div className="h-10 sm:h-12 w-10 sm:w-12 flex items-center justify-center p-0.5 transition group-hover:scale-105">
+            <div className="h-9 sm:h-12 w-9 sm:w-12 flex items-center justify-center p-0.5 transition group-hover:scale-105">
               <img 
                 src="/logo-emblem.png" 
                 alt="Classy Drip Crest" 
@@ -137,10 +130,10 @@ export default function Header() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="font-serif tracking-[0.24em] text-lg sm:text-2xl font-bold uppercase text-black leading-none">
+              <span className="font-serif tracking-[0.2em] text-base sm:text-2xl font-black uppercase text-black leading-none">
                 CLASSY DRIP
               </span>
-              <span className="text-[9px] uppercase tracking-[0.28em] text-neutral-500 font-bold mt-0.5">
+              <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.25em] text-neutral-500 font-bold mt-0.5">
                 Defined By Class
               </span>
             </div>
@@ -352,6 +345,22 @@ export default function Header() {
             </button>
           </div>
 
+        </div>
+
+        {/* 2b. KeenCares-style Integrated Mobile Search Bar (Only shown on mobile/tablet) */}
+        <div className="lg:hidden px-4 pt-1 pb-3">
+          <div 
+            onClick={() => setIsSearchOpen(true)}
+            className="flex items-center justify-between w-full bg-neutral-100 hover:bg-neutral-200/80 rounded-full px-4 py-2.5 cursor-pointer border border-neutral-200 transition-all duration-200 active:scale-[0.99]"
+          >
+            <div className="flex items-center gap-2.5 text-neutral-400 text-xs font-medium">
+              <Search className="w-4 h-4 text-neutral-500" />
+              <span>Search drop shoulder, duo sets, co-ords...</span>
+            </div>
+            <div className="w-6 h-6 rounded-full bg-black text-white flex items-center justify-center flex-shrink-0">
+              <Search className="w-3 h-3 text-white" />
+            </div>
+          </div>
         </div>
       </div>
 

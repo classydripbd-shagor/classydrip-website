@@ -37,66 +37,66 @@ export default function ShopPage() {
     <div className="min-h-screen bg-[#fafafa] py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Breadcrumb & Title */}
-        <div className="mb-8">
-          <div className="flex items-center gap-2 text-xs text-neutral-400 mb-2">
+        {/* Breadcrumb & Title (KeenCares Style: Centered bold header with product count) */}
+        <div className="mb-6 sm:mb-8 text-center max-w-xl mx-auto">
+          <div className="flex items-center justify-center gap-1.5 text-xs text-neutral-400 mb-1.5 font-medium">
             <span>Home</span>
             <span>/</span>
-            <span className="text-neutral-900 font-semibold">Shop Collections</span>
+            <span className="text-black font-bold">{activeCategoryObj.name}</span>
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-neutral-900">
+          <h1 className="font-serif text-3xl sm:text-5xl font-black text-black tracking-tight">
             {activeCategoryObj.name}
           </h1>
-          <p className="text-xs sm:text-sm text-neutral-500 mt-1">
-            Explore {filteredProducts.length} curated pieces crafted with premium heavyweight fabrics.
+          <p className="text-xs sm:text-sm text-neutral-500 font-medium mt-1">
+            {filteredProducts.length} products
           </p>
         </div>
 
-        {/* Filter & Sorting Toolbar */}
-        <div className="bg-white p-4 rounded-2xl border border-neutral-100 shadow-sm mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        {/* KeenCares-style Quick Action Buttons Row (Sort dropdown pill & Filter pill) */}
+        <div className="flex items-center justify-center sm:justify-between gap-3 mb-8">
           
-          {/* Category Tabs (Desktop) */}
-          <div className="hidden lg:flex items-center gap-1.5 overflow-x-auto w-full md:w-auto scrollbar-none">
+          {/* Left Action Pills (Sort Pill + Target Fit Pill) */}
+          <div className="flex items-center gap-2.5">
+            {/* Sort Pill */}
+            <div className="relative">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="appearance-none bg-white hover:bg-neutral-50 pl-4 pr-9 py-2.5 rounded-full border border-neutral-300 text-xs font-bold text-neutral-900 shadow-sm focus:outline-none focus:border-black cursor-pointer"
+              >
+                <option value="featured">⇅ Newest / Featured</option>
+                <option value="rating">⇅ Highest Rated</option>
+                <option value="price-low">⇅ Price: Low to High</option>
+                <option value="price-high">⇅ Price: High to Low</option>
+              </select>
+              <ArrowUpDown className="w-3.5 h-3.5 text-neutral-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            </div>
+
+            {/* Filter Toggle Pill (Mobile & Tablet) */}
+            <button
+              onClick={() => setMobileFilterOpen(true)}
+              className="lg:hidden flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-neutral-50 rounded-full border border-neutral-300 text-xs font-bold text-neutral-900 shadow-sm"
+            >
+              <SlidersHorizontal className="w-3.5 h-3.5 text-neutral-600" />
+              <span>Filters {selectedCategory !== 'all' ? `(1)` : ''}</span>
+            </button>
+          </div>
+
+          {/* Desktop Categories Quick Tabs */}
+          <div className="hidden lg:flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             {CATEGORIES.map(cat => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition ${
                   selectedCategory === cat.id
-                    ? 'bg-neutral-900 text-white shadow'
+                    ? 'bg-black text-white shadow'
                     : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
                 }`}
               >
                 {cat.name}
               </button>
             ))}
-          </div>
-
-          {/* Mobile Filter Toggle */}
-          <div className="flex items-center justify-between w-full lg:w-auto gap-3">
-            <button
-              onClick={() => setMobileFilterOpen(true)}
-              className="lg:hidden flex items-center gap-2 px-4 py-2 bg-neutral-100 hover:bg-neutral-200 rounded-xl text-xs font-semibold text-neutral-800"
-            >
-              <Filter className="w-4 h-4 text-neutral-500" />
-              <span>Filters ({selectedCategory !== 'all' ? 1 : 0})</span>
-            </button>
-
-            {/* Sort Selector */}
-            <div className="flex items-center gap-2 text-xs">
-              <span className="text-neutral-500 hidden sm:inline">Sort By:</span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="px-3 py-2 rounded-xl border border-neutral-200 bg-white font-medium text-neutral-800 text-xs focus:outline-none focus:border-black cursor-pointer"
-              >
-                <option value="featured">Featured Picks</option>
-                <option value="newest">Newest Drops</option>
-                <option value="rating">Highest Rated</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-              </select>
-            </div>
           </div>
 
         </div>

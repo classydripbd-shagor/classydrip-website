@@ -7,6 +7,7 @@ import ShopPage from './pages/ShopPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import TrackOrderPage from './pages/TrackOrderPage';
+import CategoriesPage from './pages/CategoriesPage';
 import QuickViewModal from './components/QuickViewModal';
 import CartDrawer from './components/CartDrawer';
 import CheckoutModal from './components/CheckoutModal';
@@ -38,6 +39,7 @@ function MainContent() {
   const pageMap = {
     home: <HomePage />,
     shop: <ShopPage />,
+    categories: <CategoriesPage />,
     about: <AboutPage />,
     contact: <ContactPage />,
     track: <TrackOrderPage />,
